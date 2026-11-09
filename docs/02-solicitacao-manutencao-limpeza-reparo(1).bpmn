@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_SolicitacaoServico" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_SolicitacaoServico" name="Solicitação de Manutenção, Reparo ou Limpeza" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_SolicitacaoServico">
+      <bpmn:lane id="Lane_Prestador" name="PRESTADOR">
+        <bpmn:flowNodeRef>S_Receber</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Executar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Foto</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Concluir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Iniciar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Aceita</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Admin" name="PORTARIA / ADMIN">
+        <bpmn:flowNodeRef>S_Analisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Atribuir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Reatribuir</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Morador" name="MORADOR">
+        <bpmn:flowNodeRef>S_Acompanhar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Criar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>S_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="S_Start" name="Morador identifica necessidade" />
+    <bpmn:task id="S_Criar" name="Criar solicitação + foto opcional" />
+    <bpmn:task id="S_Analisar" name="Analisar" />
+    <bpmn:task id="S_Atribuir" name="Atribuir prestador" />
+    <bpmn:task id="S_Receber" name="Prestador recebe serviço" />
+    <bpmn:exclusiveGateway id="S_Aceita" name="Prestador aceita?" />
+    <bpmn:task id="S_Reatribuir" name="Reatribuir prestador" />
+    <bpmn:task id="S_Iniciar" name="Iniciar atendimento" />
+    <bpmn:task id="S_Executar" name="Executar serviço" />
+    <bpmn:task id="S_Foto" name="Adicionar foto de conclusão" />
+    <bpmn:task id="S_Concluir" name="Concluir serviço" />
+    <bpmn:task id="S_Acompanhar" name="Morador visualiza resultado" />
+    <bpmn:endEvent id="S_Final" name="Solicitação CONCLUIDA" />
+    <bpmn:sequenceFlow id="SF1" sourceRef="S_Start" targetRef="S_Criar" />
+    <bpmn:sequenceFlow id="SF2" sourceRef="S_Criar" targetRef="S_Analisar" />
+    <bpmn:sequenceFlow id="SF3" sourceRef="S_Analisar" targetRef="S_Atribuir" />
+    <bpmn:sequenceFlow id="SF4" sourceRef="S_Atribuir" targetRef="S_Receber" />
+    <bpmn:sequenceFlow id="SF5" sourceRef="S_Receber" targetRef="S_Aceita" />
+    <bpmn:sequenceFlow id="SF6" name="Não" sourceRef="S_Aceita" targetRef="S_Reatribuir" />
+    <bpmn:sequenceFlow id="SF7" sourceRef="S_Reatribuir" targetRef="S_Atribuir" />
+    <bpmn:sequenceFlow id="SF8" name="Sim" sourceRef="S_Aceita" targetRef="S_Iniciar" />
+    <bpmn:sequenceFlow id="SF9" sourceRef="S_Iniciar" targetRef="S_Executar" />
+    <bpmn:sequenceFlow id="SF10" sourceRef="S_Executar" targetRef="S_Foto" />
+    <bpmn:sequenceFlow id="SF11" sourceRef="S_Foto" targetRef="S_Concluir" />
+    <bpmn:sequenceFlow id="SF12" sourceRef="S_Concluir" targetRef="S_Acompanhar" />
+    <bpmn:sequenceFlow id="SF13" sourceRef="S_Acompanhar" targetRef="S_Final" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_SolicitacaoServico">
+    <bpmndi:BPMNPlane id="Plane_Process_SolicitacaoServico" bpmnElement="Process_SolicitacaoServico">
+      <bpmndi:BPMNShape id="Shape_Lane_Prestador" bpmnElement="Lane_Prestador" isHorizontal="true">
+        <dc:Bounds x="160" y="520" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Admin" bpmnElement="Lane_Admin" isHorizontal="true">
+        <dc:Bounds x="160" y="300" width="2400" height="220" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Morador" bpmnElement="Lane_Morador" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Start" bpmnElement="S_Start">
+        <dc:Bounds x="220" y="150" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="204" y="186" width="69" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Receber" bpmnElement="S_Receber">
+        <dc:Bounds x="990" y="565" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Aceita" bpmnElement="S_Aceita" isMarkerVisible="true">
+        <dc:Bounds x="1210" y="580" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1209" y="630" width="53" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Executar" bpmnElement="S_Executar">
+        <dc:Bounds x="1540" y="565" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Foto" bpmnElement="S_Foto">
+        <dc:Bounds x="1750" y="565" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Concluir" bpmnElement="S_Concluir">
+        <dc:Bounds x="1980" y="565" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Acompanhar" bpmnElement="S_Acompanhar">
+        <dc:Bounds x="2190" y="125" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Final" bpmnElement="S_Final">
+        <dc:Bounds x="2410" y="147" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2396" y="183" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Criar" bpmnElement="S_Criar">
+        <dc:Bounds x="310" y="128" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Analisar" bpmnElement="S_Analisar">
+        <dc:Bounds x="540" y="360" width="170" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Atribuir" bpmnElement="S_Atribuir">
+        <dc:Bounds x="815" y="360" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Reatribuir" bpmnElement="S_Reatribuir">
+        <dc:Bounds x="1320" y="360" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_S_Iniciar" bpmnElement="S_Iniciar">
+        <dc:Bounds x="1350" y="565" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_SF1" bpmnElement="SF1">
+        <di:waypoint x="256" y="168" />
+        <di:waypoint x="310" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF2" bpmnElement="SF2">
+        <di:waypoint x="490" y="168" />
+        <di:waypoint x="510" y="168" />
+        <di:waypoint x="510" y="400" />
+        <di:waypoint x="540" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF3" bpmnElement="SF3">
+        <di:waypoint x="710" y="400" />
+        <di:waypoint x="815" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF4" bpmnElement="SF4">
+        <di:waypoint x="900" y="440" />
+        <di:waypoint x="900" y="605" />
+        <di:waypoint x="990" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF5" bpmnElement="SF5">
+        <di:waypoint x="1160" y="605" />
+        <di:waypoint x="1185" y="605" />
+        <di:waypoint x="1185" y="605" />
+        <di:waypoint x="1210" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF6" bpmnElement="SF6">
+        <di:waypoint x="1235" y="580" />
+        <di:waypoint x="1235" y="400" />
+        <di:waypoint x="1320" y="400" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239" y="481" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF7" bpmnElement="SF7">
+        <di:waypoint x="1320" y="400" />
+        <di:waypoint x="985" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF8" bpmnElement="SF8">
+        <di:waypoint x="1260" y="605" />
+        <di:waypoint x="1350" y="605" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1290" y="595" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF9" bpmnElement="SF9">
+        <di:waypoint x="1510" y="605" />
+        <di:waypoint x="1540" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF10" bpmnElement="SF10">
+        <di:waypoint x="1700" y="605" />
+        <di:waypoint x="1725" y="605" />
+        <di:waypoint x="1725" y="605" />
+        <di:waypoint x="1750" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF11" bpmnElement="SF11">
+        <di:waypoint x="1930" y="605" />
+        <di:waypoint x="1955" y="605" />
+        <di:waypoint x="1955" y="605" />
+        <di:waypoint x="1980" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF12" bpmnElement="SF12">
+        <di:waypoint x="2140" y="605" />
+        <di:waypoint x="2165" y="605" />
+        <di:waypoint x="2165" y="165" />
+        <di:waypoint x="2190" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_SF13" bpmnElement="SF13">
+        <di:waypoint x="2370" y="165" />
+        <di:waypoint x="2390" y="165" />
+        <di:waypoint x="2390" y="165" />
+        <di:waypoint x="2410" y="165" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

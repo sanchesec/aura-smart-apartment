@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_ControlePortaria" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_ControlePortaria" name="Controle de Acesso pela Portaria" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_ControlePortaria">
+      <bpmn:lane id="Lane_Sistema" name="SISTEMA — BUBBLE">
+        <bpmn:flowNodeRef>R_Dentro</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Finalizar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Consultar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Negar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Autorizado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_FimNegado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Portaria" name="PORTARIA">
+        <bpmn:flowNodeRef>R_Conferir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Entrada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Saida</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Pesquisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>R_Start</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="R_Start" name="Visitante ou prestador chega" />
+    <bpmn:task id="R_Pesquisar" name="Pesquisar por nome, documento ou código" />
+    <bpmn:task id="R_Consultar" name="Consultar autorização no Bubble" />
+    <bpmn:exclusiveGateway id="R_Autorizado" name="Acesso autorizado?" />
+    <bpmn:task id="R_Negar" name="Negar entrada e registrar ocorrência" />
+    <bpmn:endEvent id="R_FimNegado" name="Acesso não realizado" />
+    <bpmn:task id="R_Conferir" name="Conferir informações" />
+    <bpmn:task id="R_Entrada" name="Registrar entrada" />
+    <bpmn:task id="R_Dentro" name="Atualizar status para DENTRO" />
+    <bpmn:task id="R_Saida" name="Registrar saída" />
+    <bpmn:task id="R_Finalizar" name="Atualizar status para FINALIZADA" />
+    <bpmn:endEvent id="R_Final" name="Acesso encerrado" />
+    <bpmn:sequenceFlow id="RF1" sourceRef="R_Start" targetRef="R_Pesquisar" />
+    <bpmn:sequenceFlow id="RF2" sourceRef="R_Pesquisar" targetRef="R_Consultar" />
+    <bpmn:sequenceFlow id="RF3" sourceRef="R_Consultar" targetRef="R_Autorizado" />
+    <bpmn:sequenceFlow id="RF4" name="Não" sourceRef="R_Autorizado" targetRef="R_Negar" />
+    <bpmn:sequenceFlow id="RF5" sourceRef="R_Negar" targetRef="R_FimNegado" />
+    <bpmn:sequenceFlow id="RF6" name="Sim" sourceRef="R_Autorizado" targetRef="R_Conferir" />
+    <bpmn:sequenceFlow id="RF7" sourceRef="R_Conferir" targetRef="R_Entrada" />
+    <bpmn:sequenceFlow id="RF8" sourceRef="R_Entrada" targetRef="R_Dentro" />
+    <bpmn:sequenceFlow id="RF9" sourceRef="R_Dentro" targetRef="R_Saida" />
+    <bpmn:sequenceFlow id="RF10" sourceRef="R_Saida" targetRef="R_Finalizar" />
+    <bpmn:sequenceFlow id="RF11" sourceRef="R_Finalizar" targetRef="R_Final" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_ControlePortaria">
+    <bpmndi:BPMNPlane id="Plane_Process_ControlePortaria" bpmnElement="Process_ControlePortaria">
+      <bpmndi:BPMNShape id="Shape_Lane_Sistema" bpmnElement="Lane_Sistema" isHorizontal="true">
+        <dc:Bounds x="160" y="300" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Portaria" bpmnElement="Lane_Portaria" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Start" bpmnElement="R_Start">
+        <dc:Bounds x="220" y="150" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="200" width="66" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Autorizado" bpmnElement="R_Autorizado" isMarkerVisible="true">
+        <dc:Bounds x="780" y="360" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="773" y="410" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Conferir" bpmnElement="R_Conferir">
+        <dc:Bounds x="910" y="125" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Entrada" bpmnElement="R_Entrada">
+        <dc:Bounds x="1130" y="125" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Dentro" bpmnElement="R_Dentro">
+        <dc:Bounds x="1340" y="345" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Saida" bpmnElement="R_Saida">
+        <dc:Bounds x="1560" y="125" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Finalizar" bpmnElement="R_Finalizar">
+        <dc:Bounds x="1770" y="345" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Pesquisar" bpmnElement="R_Pesquisar">
+        <dc:Bounds x="300" y="128" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Consultar" bpmnElement="R_Consultar">
+        <dc:Bounds x="510" y="345" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Negar" bpmnElement="R_Negar">
+        <dc:Bounds x="930" y="410" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_FimNegado" bpmnElement="R_FimNegado">
+        <dc:Bounds x="1192" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1179" y="468" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_R_Final" bpmnElement="R_Final">
+        <dc:Bounds x="2082" y="367" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2072" y="403" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_RF1" bpmnElement="RF1">
+        <di:waypoint x="256" y="168" />
+        <di:waypoint x="300" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF2" bpmnElement="RF2">
+        <di:waypoint x="480" y="168" />
+        <di:waypoint x="600" y="168" />
+        <di:waypoint x="600" y="345" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF3" bpmnElement="RF3">
+        <di:waypoint x="690" y="385" />
+        <di:waypoint x="780" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF4" bpmnElement="RF4">
+        <di:waypoint x="830" y="385" />
+        <di:waypoint x="870" y="385" />
+        <di:waypoint x="870" y="450" />
+        <di:waypoint x="930" y="450" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="882" y="440" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF5" bpmnElement="RF5">
+        <di:waypoint x="1110" y="450" />
+        <di:waypoint x="1192" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF6" bpmnElement="RF6">
+        <di:waypoint x="830" y="385" />
+        <di:waypoint x="870" y="385" />
+        <di:waypoint x="870" y="165" />
+        <di:waypoint x="910" y="165" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="875" y="265" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF7" bpmnElement="RF7">
+        <di:waypoint x="1080" y="165" />
+        <di:waypoint x="1105" y="165" />
+        <di:waypoint x="1105" y="165" />
+        <di:waypoint x="1130" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF8" bpmnElement="RF8">
+        <di:waypoint x="1290" y="165" />
+        <di:waypoint x="1315" y="165" />
+        <di:waypoint x="1315" y="385" />
+        <di:waypoint x="1340" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF9" bpmnElement="RF9">
+        <di:waypoint x="1510" y="385" />
+        <di:waypoint x="1535" y="385" />
+        <di:waypoint x="1535" y="165" />
+        <di:waypoint x="1560" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF10" bpmnElement="RF10">
+        <di:waypoint x="1720" y="165" />
+        <di:waypoint x="1745" y="165" />
+        <di:waypoint x="1745" y="385" />
+        <di:waypoint x="1770" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_RF11" bpmnElement="RF11">
+        <di:waypoint x="1950" y="385" />
+        <di:waypoint x="2082" y="385" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

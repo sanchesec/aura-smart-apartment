@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_AtendimentoPrestador" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_AtendimentoPrestador" name="Atendimento do Prestador" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_AtendimentoPrestador">
+      <bpmn:lane id="Lane_Prestador" name="PRESTADOR">
+        <bpmn:flowNodeRef>P_Ver</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Iniciar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Executar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Foto</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Concluir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Aceita</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Admin" name="PORTARIA / ADMIN">
+        <bpmn:flowNodeRef>P_Recusa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P_Reatribui</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P_Start" name="Serviço atribuído ao ao funcionário">
+      <bpmn:outgoing>Flow_0k7h3ye</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0vydm46</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="P_Ver" name="Visualizar detalhes do serviço">
+      <bpmn:incoming>Flow_0vydm46</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="P_Aceita" name="Aceitar serviço?" />
+    <bpmn:task id="P_Recusa" name="Informar recusa" />
+    <bpmn:task id="P_Reatribui" name="Administrador reatribui aos funcionários">
+      <bpmn:incoming>Flow_0k7h3ye</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="P_Iniciar" name="Iniciar atendimento">
+      <bpmn:incoming>PF6</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="P_Executar" name="Executar serviço" />
+    <bpmn:task id="P_Foto" name="Adicionar foto final" />
+    <bpmn:task id="P_Concluir" name="Marcar como concluído" />
+    <bpmn:endEvent id="P_Final" name="Atendimento concluído" />
+    <bpmn:sequenceFlow id="PF2" sourceRef="P_Ver" targetRef="P_Aceita" />
+    <bpmn:sequenceFlow id="PF3" name="Não" sourceRef="P_Aceita" targetRef="P_Recusa" />
+    <bpmn:sequenceFlow id="PF4" sourceRef="P_Recusa" targetRef="P_Reatribui" />
+    <bpmn:sequenceFlow id="PF6" name="Sim" sourceRef="P_Aceita" targetRef="P_Iniciar" />
+    <bpmn:sequenceFlow id="PF9" sourceRef="P_Iniciar" targetRef="P_Executar" />
+    <bpmn:sequenceFlow id="PF10" sourceRef="P_Executar" targetRef="P_Foto" />
+    <bpmn:sequenceFlow id="PF11" sourceRef="P_Foto" targetRef="P_Concluir" />
+    <bpmn:sequenceFlow id="PF12" sourceRef="P_Concluir" targetRef="P_Final" />
+    <bpmn:sequenceFlow id="Flow_0k7h3ye" sourceRef="P_Start" targetRef="P_Reatribui" />
+    <bpmn:sequenceFlow id="Flow_0vydm46" sourceRef="P_Start" targetRef="P_Ver" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_AtendimentoPrestador">
+    <bpmndi:BPMNPlane id="Plane_Process_AtendimentoPrestador" bpmnElement="Process_AtendimentoPrestador">
+      <bpmndi:BPMNShape id="Shape_Lane_Prestador" bpmnElement="Lane_Prestador" isHorizontal="true">
+        <dc:Bounds x="160" y="430" width="2400" height="310" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Admin" bpmnElement="Lane_Admin" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="350" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Recusa" bpmnElement="P_Recusa">
+        <dc:Bounds x="975" y="320" width="150" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Reatribui" bpmnElement="P_Reatribui">
+        <dc:Bounds x="895" y="120" width="170" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Start" bpmnElement="P_Start">
+        <dc:Bounds x="262" y="522" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="239" y="558" width="84" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Ver" bpmnElement="P_Ver">
+        <dc:Bounds x="520" y="500" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Aceita" bpmnElement="P_Aceita" isMarkerVisible="true">
+        <dc:Bounds x="805" y="525" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="786" y="501" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Iniciar" bpmnElement="P_Iniciar">
+        <dc:Bounds x="1400" y="480" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Executar" bpmnElement="P_Executar">
+        <dc:Bounds x="1650" y="480" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Foto" bpmnElement="P_Foto">
+        <dc:Bounds x="1890" y="480" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Concluir" bpmnElement="P_Concluir">
+        <dc:Bounds x="2140" y="480" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_P_Final" bpmnElement="P_Final">
+        <dc:Bounds x="2442" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2424" y="538" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_PF2" bpmnElement="PF2">
+        <di:waypoint x="700" y="540" />
+        <di:waypoint x="753" y="540" />
+        <di:waypoint x="753" y="550" />
+        <di:waypoint x="805" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF4" bpmnElement="PF4">
+        <di:waypoint x="1050" y="320" />
+        <di:waypoint x="1050" y="260" />
+        <di:waypoint x="980" y="260" />
+        <di:waypoint x="980" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF12" bpmnElement="PF12">
+        <di:waypoint x="2300" y="520" />
+        <di:waypoint x="2442" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF3" bpmnElement="PF3">
+        <di:waypoint x="855" y="550" />
+        <di:waypoint x="913" y="550" />
+        <di:waypoint x="913" y="360" />
+        <di:waypoint x="975" y="360" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="928" y="350" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF6" bpmnElement="PF6">
+        <di:waypoint x="830" y="575" />
+        <di:waypoint x="830" y="630" />
+        <di:waypoint x="1213" y="630" />
+        <di:waypoint x="1213" y="520" />
+        <di:waypoint x="1400" y="520" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1139" y="653" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF9" bpmnElement="PF9">
+        <di:waypoint x="1560" y="520" />
+        <di:waypoint x="1650" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF10" bpmnElement="PF10">
+        <di:waypoint x="1810" y="520" />
+        <di:waypoint x="1890" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_PF11" bpmnElement="PF11">
+        <di:waypoint x="2070" y="520" />
+        <di:waypoint x="2140" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k7h3ye_di" bpmnElement="Flow_0k7h3ye">
+        <di:waypoint x="280" y="522" />
+        <di:waypoint x="280" y="160" />
+        <di:waypoint x="895" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vydm46_di" bpmnElement="Flow_0vydm46">
+        <di:waypoint x="298" y="540" />
+        <di:waypoint x="520" y="540" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_AutorizacaoVisitante" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_AutorizacaoVisitante" name="Autorização de Visitante" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_AutorizacaoVisitante">
+      <bpmn:lane id="Lane_Portaria" name="PORTARIA / ADMIN">
+        <bpmn:flowNodeRef>V_Visualizar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Conferir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Entrada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Saida</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sistema" name="SISTEMA — BUBBLE / MAKE / PYTHON">
+        <bpmn:flowNodeRef>V_Completar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Validar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Motivo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Valido</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Morador" name="MORADOR">
+        <bpmn:flowNodeRef>V_Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Invalida</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>V_Preencher</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="V_Start" name="Morador deseja autorizar visitante" />
+    <bpmn:task id="V_Preencher" name="Preencher dados do visitante" />
+    <bpmn:task id="V_Completar" name="Bubble adiciona dados do morador" />
+    <bpmn:task id="V_Validar" name="Make envia para API Python" />
+    <bpmn:exclusiveGateway id="V_Valido" name="Solicitação válida?" />
+    <bpmn:task id="V_Motivo" name="Exibir motivo da invalidação" />
+    <bpmn:endEvent id="V_Invalida" name="Solicitação INVALIDA" />
+    <bpmn:task id="V_Visualizar" name="Portaria visualiza autorização" />
+    <bpmn:task id="V_Conferir" name="Conferir documento ou código" />
+    <bpmn:task id="V_Entrada" name="Registrar entrada — DENTRO" />
+    <bpmn:task id="V_Saida" name="Registrar saída" />
+    <bpmn:endEvent id="V_Final" name="Visita FINALIZADA" />
+    <bpmn:sequenceFlow id="VF1" sourceRef="V_Start" targetRef="V_Preencher" />
+    <bpmn:sequenceFlow id="VF2" sourceRef="V_Preencher" targetRef="V_Completar" />
+    <bpmn:sequenceFlow id="VF3" sourceRef="V_Completar" targetRef="V_Validar" />
+    <bpmn:sequenceFlow id="VF4" sourceRef="V_Validar" targetRef="V_Valido" />
+    <bpmn:sequenceFlow id="VF5" name="Não" sourceRef="V_Valido" targetRef="V_Motivo" />
+    <bpmn:sequenceFlow id="VF6" sourceRef="V_Motivo" targetRef="V_Invalida" />
+    <bpmn:sequenceFlow id="VF7" name="Sim — APROVADA" sourceRef="V_Valido" targetRef="V_Visualizar" />
+    <bpmn:sequenceFlow id="VF8" sourceRef="V_Visualizar" targetRef="V_Conferir" />
+    <bpmn:sequenceFlow id="VF9" sourceRef="V_Conferir" targetRef="V_Entrada" />
+    <bpmn:sequenceFlow id="VF10" sourceRef="V_Entrada" targetRef="V_Saida" />
+    <bpmn:sequenceFlow id="VF11" sourceRef="V_Saida" targetRef="V_Final" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_AutorizacaoVisitante">
+    <bpmndi:BPMNPlane id="Plane_Process_AutorizacaoVisitante" bpmnElement="Process_AutorizacaoVisitante">
+      <bpmndi:BPMNShape id="Shape_Lane_Morador" bpmnElement="Lane_Morador" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Sistema" bpmnElement="Lane_Sistema" isHorizontal="true">
+        <dc:Bounds x="160" y="300" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Portaria" bpmnElement="Lane_Portaria" isHorizontal="true">
+        <dc:Bounds x="160" y="520" width="2400" height="220" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Start" bpmnElement="V_Start">
+        <dc:Bounds x="220" y="150" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="195" y="186" width="86" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Completar" bpmnElement="V_Completar">
+        <dc:Bounds x="530" y="345" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Validar" bpmnElement="V_Validar">
+        <dc:Bounds x="760" y="345" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Valido" bpmnElement="V_Valido" isMarkerVisible="true">
+        <dc:Bounds x="1000" y="360" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="995" y="410" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Motivo" bpmnElement="V_Motivo">
+        <dc:Bounds x="1205" y="330" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Invalida" bpmnElement="V_Invalida">
+        <dc:Bounds x="1272" y="147" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1240" y="109.5" width="100" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Visualizar" bpmnElement="V_Visualizar">
+        <dc:Bounds x="1140" y="565" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Conferir" bpmnElement="V_Conferir">
+        <dc:Bounds x="1360" y="565" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Entrada" bpmnElement="V_Entrada">
+        <dc:Bounds x="1580" y="565" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Saida" bpmnElement="V_Saida">
+        <dc:Bounds x="1800" y="565" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Final" bpmnElement="V_Final">
+        <dc:Bounds x="2030" y="587" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2015" y="623" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_V_Preencher" bpmnElement="V_Preencher">
+        <dc:Bounds x="305" y="128" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_VF1" bpmnElement="VF1">
+        <di:waypoint x="256" y="168" />
+        <di:waypoint x="305" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF2" bpmnElement="VF2">
+        <di:waypoint x="390" y="208" />
+        <di:waypoint x="390" y="385" />
+        <di:waypoint x="530" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF3" bpmnElement="VF3">
+        <di:waypoint x="710" y="385" />
+        <di:waypoint x="735" y="385" />
+        <di:waypoint x="735" y="385" />
+        <di:waypoint x="760" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF4" bpmnElement="VF4">
+        <di:waypoint x="940" y="385" />
+        <di:waypoint x="970" y="385" />
+        <di:waypoint x="970" y="385" />
+        <di:waypoint x="1000" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF5" bpmnElement="VF5">
+        <di:waypoint x="1050" y="385" />
+        <di:waypoint x="1095" y="385" />
+        <di:waypoint x="1095" y="370" />
+        <di:waypoint x="1205" y="370" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1102" y="370" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF6" bpmnElement="VF6">
+        <di:waypoint x="1290" y="330" />
+        <di:waypoint x="1290" y="183" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF7" bpmnElement="VF7">
+        <di:waypoint x="1050" y="385" />
+        <di:waypoint x="1095" y="385" />
+        <di:waypoint x="1095" y="605" />
+        <di:waypoint x="1140" y="605" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1080" y="485" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF8" bpmnElement="VF8">
+        <di:waypoint x="1310" y="605" />
+        <di:waypoint x="1335" y="605" />
+        <di:waypoint x="1335" y="605" />
+        <di:waypoint x="1360" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF9" bpmnElement="VF9">
+        <di:waypoint x="1530" y="605" />
+        <di:waypoint x="1555" y="605" />
+        <di:waypoint x="1555" y="605" />
+        <di:waypoint x="1580" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF10" bpmnElement="VF10">
+        <di:waypoint x="1750" y="605" />
+        <di:waypoint x="1775" y="605" />
+        <di:waypoint x="1775" y="605" />
+        <di:waypoint x="1800" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_VF11" bpmnElement="VF11">
+        <di:waypoint x="1970" y="605" />
+        <di:waypoint x="2000" y="605" />
+        <di:waypoint x="2000" y="605" />
+        <di:waypoint x="2030" y="605" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

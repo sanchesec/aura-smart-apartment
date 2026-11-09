@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_GestaoAdmin" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_GestaoAdmin" name="Gestão Administrativa de Solicitações e Prestadores" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_GestaoAdmin">
+      <bpmn:lane id="Lane_Admin" name="PORTARIA / ADMIN">
+        <bpmn:flowNodeRef>A_Encerrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Analisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Cadastrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Selecionar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Acompanhar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Atribuir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Revisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Concluido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_PrestadorExiste</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>A_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="A_Start" name="Nova solicitação recebida" />
+    <bpmn:task id="A_Analisar" name="Analisar solicitação" />
+    <bpmn:exclusiveGateway id="A_PrestadorExiste" name="Há prestador adequado disponível?" />
+    <bpmn:task id="A_Cadastrar" name="Cadastrar ou ativar prestador" />
+    <bpmn:task id="A_Selecionar" name="Selecionar prestador">
+      <bpmn:incoming>Flow_1mfi0nl</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="A_Atribuir" name="Atribuir serviço">
+      <bpmn:incoming>AF10</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mfi0nl</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="A_Acompanhar" name="Acompanhar status" />
+    <bpmn:exclusiveGateway id="A_Concluido" name="Serviço concluído?" />
+    <bpmn:task id="A_Revisar" name="Revisar pendência / reatribuir" />
+    <bpmn:task id="A_Encerrar" name="Registrar conclusão" />
+    <bpmn:endEvent id="A_Final" name="Gestão da solicitação encerrada" />
+    <bpmn:sequenceFlow id="AF1" sourceRef="A_Start" targetRef="A_Analisar" />
+    <bpmn:sequenceFlow id="AF2" sourceRef="A_Analisar" targetRef="A_PrestadorExiste" />
+    <bpmn:sequenceFlow id="AF3" name="Não" sourceRef="A_PrestadorExiste" targetRef="A_Cadastrar" />
+    <bpmn:sequenceFlow id="AF4" sourceRef="A_Cadastrar" targetRef="A_Selecionar" />
+    <bpmn:sequenceFlow id="AF5" name="Sim" sourceRef="A_PrestadorExiste" targetRef="A_Selecionar" />
+    <bpmn:sequenceFlow id="AF6" sourceRef="A_Selecionar" targetRef="A_Atribuir" />
+    <bpmn:sequenceFlow id="AF7" sourceRef="A_Atribuir" targetRef="A_Acompanhar" />
+    <bpmn:sequenceFlow id="AF8" sourceRef="A_Acompanhar" targetRef="A_Concluido" />
+    <bpmn:sequenceFlow id="AF9" name="Não" sourceRef="A_Concluido" targetRef="A_Revisar" />
+    <bpmn:sequenceFlow id="AF10" sourceRef="A_Revisar" targetRef="A_Atribuir" />
+    <bpmn:sequenceFlow id="AF11" name="Sim" sourceRef="A_Concluido" targetRef="A_Encerrar" />
+    <bpmn:sequenceFlow id="AF12" sourceRef="A_Encerrar" targetRef="A_Final" />
+    <bpmn:sequenceFlow id="Flow_1mfi0nl" sourceRef="A_Atribuir" targetRef="A_Selecionar" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_GestaoAdmin">
+    <bpmndi:BPMNPlane id="Plane_Process_GestaoAdmin" bpmnElement="Process_GestaoAdmin">
+      <bpmndi:BPMNShape id="Shape_Lane_Admin" bpmnElement="Lane_Admin" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="380" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Concluido" bpmnElement="A_Concluido" isMarkerVisible="true">
+        <dc:Bounds x="1560" y="140" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1556" y="190" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Encerrar" bpmnElement="A_Encerrar">
+        <dc:Bounds x="1900" y="125" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Start" bpmnElement="A_Start">
+        <dc:Bounds x="220" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="209" y="278" width="59" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Analisar" bpmnElement="A_Analisar">
+        <dc:Bounds x="325" y="220" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_PrestadorExiste" bpmnElement="A_PrestadorExiste" isMarkerVisible="true">
+        <dc:Bounds x="605" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="594" y="185" width="72" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Cadastrar" bpmnElement="A_Cadastrar">
+        <dc:Bounds x="920" y="340" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Selecionar" bpmnElement="A_Selecionar">
+        <dc:Bounds x="925" y="220" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Acompanhar" bpmnElement="A_Acompanhar">
+        <dc:Bounds x="1345" y="125" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Atribuir" bpmnElement="A_Atribuir">
+        <dc:Bounds x="1220" y="240" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Revisar" bpmnElement="A_Revisar">
+        <dc:Bounds x="1600" y="310" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_A_Final" bpmnElement="A_Final">
+        <dc:Bounds x="2172" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2161" y="198" width="59" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_AF1" bpmnElement="AF1">
+        <di:waypoint x="256" y="260" />
+        <di:waypoint x="325" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF2" bpmnElement="AF2">
+        <di:waypoint x="495" y="260" />
+        <di:waypoint x="605" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF3" bpmnElement="AF3">
+        <di:waypoint x="630" y="285" />
+        <di:waypoint x="630" y="380" />
+        <di:waypoint x="920" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="634" y="323" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF4" bpmnElement="AF4">
+        <di:waypoint x="1010" y="340" />
+        <di:waypoint x="1010" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF5" bpmnElement="AF5">
+        <di:waypoint x="655" y="260" />
+        <di:waypoint x="925" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="759" y="251" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF6" bpmnElement="AF6">
+        <di:waypoint x="1010" y="220" />
+        <di:waypoint x="1010" y="130" />
+        <di:waypoint x="1260" y="130" />
+        <di:waypoint x="1260" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF7" bpmnElement="AF7">
+        <di:waypoint x="1300" y="240" />
+        <di:waypoint x="1300" y="165" />
+        <di:waypoint x="1345" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF8" bpmnElement="AF8">
+        <di:waypoint x="1515" y="165" />
+        <di:waypoint x="1560" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF9" bpmnElement="AF9">
+        <di:waypoint x="1610" y="165" />
+        <di:waypoint x="1690" y="165" />
+        <di:waypoint x="1690" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1637" y="143" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF10" bpmnElement="AF10">
+        <di:waypoint x="1600" y="350" />
+        <di:waypoint x="1490" y="350" />
+        <di:waypoint x="1490" y="280" />
+        <di:waypoint x="1380" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF11" bpmnElement="AF11">
+        <di:waypoint x="1585" y="140" />
+        <di:waypoint x="1585" y="100" />
+        <di:waypoint x="1980" y="100" />
+        <di:waypoint x="1980" y="125" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1793" y="90" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_AF12" bpmnElement="AF12">
+        <di:waypoint x="2060" y="165" />
+        <di:waypoint x="2116" y="165" />
+        <di:waypoint x="2116" y="180" />
+        <di:waypoint x="2172" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mfi0nl_di" bpmnElement="Flow_1mfi0nl">
+        <di:waypoint x="1220" y="280" />
+        <di:waypoint x="1148" y="280" />
+        <di:waypoint x="1148" y="260" />
+        <di:waypoint x="1095" y="260" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

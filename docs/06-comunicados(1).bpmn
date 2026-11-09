@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_Comunicados" targetNamespace="http://aura-smart-apartment.local/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.31.1">
+  <bpmn:process id="Process_Comunicados" name="Publicação de Comunicados" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_Comunicados">
+      <bpmn:lane id="Lane_Morador" name="MORADOR">
+        <bpmn:flowNodeRef>C_Visualizar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>C_Final</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sistema" name="SISTEMA — BUBBLE">
+        <bpmn:flowNodeRef>C_Publicar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>C_Disponibilizar</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Admin" name="ADMIN / PORTARIA">
+        <bpmn:flowNodeRef>C_Criar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>C_Preencher</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>C_Start</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="C_Start" name="Admin identifica necessidade de comunicação" />
+    <bpmn:task id="C_Criar" name="Criar comunicado" />
+    <bpmn:task id="C_Preencher" name="Informar título, descrição, categoria e anexo" />
+    <bpmn:task id="C_Publicar" name="Publicar no Bubble" />
+    <bpmn:task id="C_Disponibilizar" name="Disponibilizar aos moradores" />
+    <bpmn:task id="C_Visualizar" name="Morador visualiza comunicado" />
+    <bpmn:endEvent id="C_Final" name="Comunicado entregue" />
+    <bpmn:sequenceFlow id="CF1" sourceRef="C_Start" targetRef="C_Criar" />
+    <bpmn:sequenceFlow id="CF2" sourceRef="C_Criar" targetRef="C_Preencher" />
+    <bpmn:sequenceFlow id="CF3" sourceRef="C_Preencher" targetRef="C_Publicar" />
+    <bpmn:sequenceFlow id="CF4" sourceRef="C_Publicar" targetRef="C_Disponibilizar" />
+    <bpmn:sequenceFlow id="CF5" sourceRef="C_Disponibilizar" targetRef="C_Visualizar" />
+    <bpmn:sequenceFlow id="CF6" sourceRef="C_Visualizar" targetRef="C_Final" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_Process_Comunicados">
+    <bpmndi:BPMNPlane id="Plane_Process_Comunicados" bpmnElement="Process_Comunicados">
+      <bpmndi:BPMNShape id="Shape_Lane_Morador" bpmnElement="Lane_Morador" isHorizontal="true">
+        <dc:Bounds x="160" y="520" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Sistema" bpmnElement="Lane_Sistema" isHorizontal="true">
+        <dc:Bounds x="160" y="300" width="2400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Lane_Admin" bpmnElement="Lane_Admin" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2400" height="220" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Start" bpmnElement="C_Start">
+        <dc:Bounds x="220" y="150" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="195" y="186" width="86" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Criar" bpmnElement="C_Criar">
+        <dc:Bounds x="300" y="125" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Preencher" bpmnElement="C_Preencher">
+        <dc:Bounds x="510" y="125" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Publicar" bpmnElement="C_Publicar">
+        <dc:Bounds x="760" y="345" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Disponibilizar" bpmnElement="C_Disponibilizar">
+        <dc:Bounds x="970" y="345" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Visualizar" bpmnElement="C_Visualizar">
+        <dc:Bounds x="1210" y="565" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_C_Final" bpmnElement="C_Final">
+        <dc:Bounds x="1440" y="587" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1424" y="623" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_CF1" bpmnElement="CF1">
+        <di:waypoint x="256" y="168" />
+        <di:waypoint x="278" y="168" />
+        <di:waypoint x="278" y="165" />
+        <di:waypoint x="300" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_CF2" bpmnElement="CF2">
+        <di:waypoint x="460" y="165" />
+        <di:waypoint x="485" y="165" />
+        <di:waypoint x="485" y="165" />
+        <di:waypoint x="510" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_CF3" bpmnElement="CF3">
+        <di:waypoint x="700" y="165" />
+        <di:waypoint x="730" y="165" />
+        <di:waypoint x="730" y="385" />
+        <di:waypoint x="760" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_CF4" bpmnElement="CF4">
+        <di:waypoint x="920" y="385" />
+        <di:waypoint x="945" y="385" />
+        <di:waypoint x="945" y="385" />
+        <di:waypoint x="970" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_CF5" bpmnElement="CF5">
+        <di:waypoint x="1150" y="385" />
+        <di:waypoint x="1180" y="385" />
+        <di:waypoint x="1180" y="605" />
+        <di:waypoint x="1210" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_CF6" bpmnElement="CF6">
+        <di:waypoint x="1390" y="605" />
+        <di:waypoint x="1415" y="605" />
+        <di:waypoint x="1415" y="605" />
+        <di:waypoint x="1440" y="605" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
