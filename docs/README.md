@@ -1,26 +1,12 @@
 # Documentação Técnica
 
-Esta pasta contém a documentação técnica do projeto Aura
+Esta pasta concentra a documentação técnica do **Aura Smart Apartment**.
 
-## Conteúdo
+## Estrutura
 
-- Visão geral do sistema
-- Funcionalidades
-- Tecnologias utilizadas
-- Arquitetura da solução
-- Fluxo de funcionamento
-- Manutenção preventiva
-- Controle de acesso
-- Controle de insumos
+- [BPMN](./bpmn/) — diagramas dos processos do sistema.
+- [Integração](./integracao/) — contratos de dados, regras e integração entre Bubble, Make e Python.
 
-## 🛠️ Tecnologias utilizadas
+## Convenção
 
-O Aura - Smart Apartment utiliza uma abordagem híbrida, combinando programação, ferramentas low-code/no-code, automação e gestão de projetos.
-
-- **Python:** scripts, lógica de negócio e integrações.
-- **Bubble:** desenvolvimento da interface e funcionalidades da aplicação.
-- **n8n:** automações, integrações e agendamento de fluxos.
-- **Git:** controle de versão.
-- **GitHub:** armazenamento do código, documentação e colaboração.
-- **GitHub Projects:** gerenciamento das atividades técnicas e desenvolvimento.
-- **Trello:** organização geral da equipe, documentação, apresentação e vídeo pitch.
+Os arquivos foram organizados por finalidade e os sufixos automáticos de upload, como `(1)` e `(3)`, foram removidos dos nomes.
