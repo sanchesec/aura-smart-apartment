@@ -23,10 +23,8 @@ Esta página reúne links usados durante a evolução do **Aura Smart Apartment*
 
 ## Make
 
-O link informado para o Make foi:
-
 - https://effervescent-horse-78b8d1.netlify.app
-
-Esse endereço é idêntico ao protótipo inicial hospedado no Netlify. Por isso, ele **não foi classificado como link oficial do cenário Make** até que o endereço correto seja confirmado.
+- **Uso informado pela equipe:** referência relacionada ao Make.
+- **Observação:** o mesmo endereço também foi informado como protótipo inicial do Aura. A duplicidade foi confirmada pela equipe e foi mantida na documentação para preservar o histórico do projeto.
 
 A documentação técnica atual considera o Make como camada de automação entre Bubble e API Python/Vercel.
