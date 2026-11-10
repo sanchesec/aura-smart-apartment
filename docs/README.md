@@ -6,6 +6,7 @@ Esta pasta concentra a documentação técnica do **Aura Smart Apartment**.
 
 - [BPMN](./bpmn/) — diagramas dos processos do sistema.
 - [Integração](./integracao/) — contratos de dados, regras e integração entre Bubble, Make e Python.
+- [Gestão](./gestao/) — planejamento da equipe, responsabilidades, cronograma e backlog.
 
 ## Convenção
 
