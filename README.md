@@ -11,7 +11,7 @@ Projeto acadêmico desenvolvido para a Expotech. A proposta é centralizar funç
 
 ## Documentação
 
-A documentação técnica está em [docs/](./docs/README.md) e inclui diagramas BPMN, materiais de gestão e documentos de integração.
+A documentação técnica está em [docs/](./docs/README.md) e inclui diagramas BPMN, materiais de gestão, documentos de integração, referências e evidências do desenvolvimento.
 
 ## Equipe
 
@@ -23,4 +23,6 @@ A documentação técnica está em [docs/](./docs/README.md) e inclui diagramas 
 
 ## Status
 
-Em desenvolvimento.
+**Primeiro MVP criado.**
+
+O MVP atual possui fluxo funcional de autorização de visitantes com Bubble, Make e API Python/Vercel, além das demais áreas desenvolvidas para a demonstração acadêmica.
