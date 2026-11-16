@@ -2,6 +2,12 @@
 
 Esta página reúne links usados durante a evolução do **Aura Smart Apartment**.
 
+## Primeiro MVP em Bubble
+
+- https://gustavosanchesec-40441.bubbleapps.io/version-test?debug_mode=true
+- **Uso:** primeiro MVP funcional do Aura Smart Apartment em Bubble.
+- **Status:** MVP de teste usado para validação dos fluxos e demonstração do projeto.
+
 ## Protótipo inicial
 
 - https://effervescent-horse-78b8d1.netlify.app
@@ -21,10 +27,32 @@ Esta página reúne links usados durante a evolução do **Aura Smart Apartment*
 - **Uso:** validação da solicitação de acesso de visitantes.
 - **Status:** integração técnica atual documentada no projeto.
 
-## Make
+## Make — cenário inicial
 
-- https://effervescent-horse-78b8d1.netlify.app
-- **Uso informado pela equipe:** referência relacionada ao Make.
-- **Observação:** o mesmo endereço também foi informado como protótipo inicial do Aura. A duplicidade foi confirmada pela equipe e foi mantida na documentação para preservar o histórico do projeto.
+- https://us2.make.com/3068116/scenarios/6796556/edit
+- **Responsável:** Eduardo José.
+- **Uso:** cenário inicial de validação/cadastro desenvolvido durante a etapa de Low-Code.
+- **Status:** versão inicial e referência histórica da automação.
 
-A documentação técnica atual considera o Make como camada de automação entre Bubble e API Python/Vercel.
+## Make — cenário final
+
+- https://us2.make.com/3068116/scenarios/6986544/edit
+- **Responsável pela implementação final:** Gustavo Soares.
+- **Uso:** cenário final de validação cadastral integrado ao Bubble e à API Python/Vercel.
+- **Fluxo:** Bubble → Make → Python/Vercel → Make → Bubble.
+- **Status:** versão funcional usada no MVP.
+
+> Os links do Make podem exigir autenticação e acesso à equipe/organização correspondente.
+
+## Evidências em vídeo — disciplina de Low-Code
+
+Eduardo José produziu dois vídeos para apresentação ao professor **Lucas Alves**, demonstrando as partes do projeto relacionadas à disciplina de Low-Code:
+
+- `2026-11-11 17-36-01.mp4`
+- `2026-11-11 18-06-27(1).mp4`
+
+Os vídeos foram fornecidos como evidências do desenvolvimento e da apresentação da parte de Low-Code. Consulte também [Evidências do projeto](../evidencias/README.md).
+
+## Observação
+
+A documentação atual considera o **Bubble** como aplicação e banco principal, o **Make** como camada de integração/automação e a **API Python/Vercel** como responsável pelas regras de validação.
