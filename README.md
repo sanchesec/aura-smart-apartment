@@ -15,11 +15,11 @@ A documentação técnica está em [docs/](./docs/README.md) e inclui diagramas 
 
 ## Equipe
 
-- Gustavo Soares
-- Matheus Farias
-- Pedro Henrique
-- Eduardo José
-- Marlon Gomes
+- Gustavo Soares - 271015
+- Matheus Farias - 281509
+- Pedro Henrique - 297591
+- Eduardo José - 222673
+- Marlon Gomes - 304616
 
 ## Status
 
